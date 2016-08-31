@@ -1,0 +1,45 @@
+{
+    "name": "XSolve/Workshop-kata",
+    "license": "MIT",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Adrian Zurek",
+            "email": "adrian.zurek@xsolve.pl"
+        },
+        {
+            "name": "Anna Matysiak",
+            "email": "anna.matysiak@xsolve.pl"
+        },
+        {
+            "name": "Maciej Tomczak",
+            "email": "maciej.tomczak@xsolve.pl"
+        },
+        {
+            "name": "Witold Adamus",
+            "email": "witold.adamus@xsolve.pl"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "silex/silex": "~2.0",
+        "symfony/yaml": "^3.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5",
+        "squizlabs/php_codesniffer": "^2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "XSolve\\Workshop\\": "src/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "scripts": {
+        "post-install-cmd": "cp -n app/config/parameters.yml.dist app/config/parameters.yml",
+        "check": "bin/phpcs --standard=phpcs.xml -p --report=full src/",
+        "test": "bin/phpunit -c phpunit.xml"
+    }
+}

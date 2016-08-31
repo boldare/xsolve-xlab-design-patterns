@@ -1,0 +1,21 @@
+# IDE
+.DS_Store
+.sass-cache/
+/nbproject
+.idea
+
+# bin
+/bin
+
+# app files
+/app/logs/*
+!/app/logs/.gitkeep
+
+# htaccess
+web/.htaccess
+
+# parameters.yml
+/app/config/parameters.yml
+
+# vendors
+/vendor
