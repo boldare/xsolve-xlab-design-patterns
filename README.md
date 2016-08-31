@@ -5,7 +5,8 @@ Utwórz dwa nowe endpointy w API dla ścieżek **GET /products** oraz **POST /or
 
 Zgodne ze specyfikacją odpowiednio:
 
-**GET /products**
+GET /products
+-------------
 
 Parametry (query params):
 
