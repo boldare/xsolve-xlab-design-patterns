@@ -16,7 +16,7 @@ class ExampleService
     /**
      * @param string $param
      */
-    public function __construct(string $param)
+    public function __construct($param)
     {
         $this->param = $param;
     }
