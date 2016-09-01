@@ -9,6 +9,7 @@ namespace XSolve\Workshop\Kata\Service\Provider;
 use Silex\Api\ControllerProviderInterface;
 use Silex\Application;
 use Silex\ControllerCollection;
+use Symfony\Component\HttpFoundation\Request;
 use XSolve\Workshop\Kata\Controller\DefaultController;
 
 class ControllerProvider implements ControllerProviderInterface
@@ -20,6 +21,13 @@ class ControllerProvider implements ControllerProviderInterface
      */
     public function connect(Application $app)
     {
+        $app->before(function(Request $request) {
+            if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+                $data = json_decode($request->getContent(), true);
+                $request->request->replace(is_array($data) ? $data : array());
+            }
+        });
+
         $app['controller.default'] = function() use($app) {
             return new DefaultController($app['service.example']);
         };
@@ -27,14 +35,9 @@ class ControllerProvider implements ControllerProviderInterface
         /** @var ControllerCollection $controllers */
         $controllers = $app['controllers_factory'];
 
-        $controllers->match('/example', [$app['controller.default'], 'exampleAction'])
-            ->method('GET');
-
-        $controllers->match('/products', [$app['controller.default'], 'listAction'])
-            ->method('GET');
-
-        $controllers->match('/order', [$app['controller.default'], 'orderAction'])
-            ->method('POST');
+        $controllers->get('/products', 'controller.default:productsAction');
+        $controllers->post('/order', 'controller.default:orderAction');
+        $controllers->get('/example', 'controller.default:exampleAction');
 
         return $controllers;
     }
