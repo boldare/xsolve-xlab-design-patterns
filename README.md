@@ -11,6 +11,8 @@ GET /products
 Parametry (query params):
 
 - **category**: _string_ - odfiltrowuje wyniki biorąc pod uwagę nazwę kategorii, lub jej fragment
+- **promo_only**: _bool_ - ma uwzględnić tylko produkty promocyjne?
+- **available_only**: _bool_ - tylko produkty dostępne?
 - **price_min**: _int_ - dolny zakres cenowy
 - **price_max**: _int_ - górny zakres cenowy
 
@@ -24,15 +26,15 @@ Dozwolone wartości to: **id**, **name**, **price**, **category**, **vat**
 
 Dozwolone wartości to **ASC**, **DESC**
 
-Produkt składa się z:
-id
-nazwa,
-opis,
-cena netto,
-stan magazynowy.
-kategoria
-stawka VAT
-promocyjny  _tak/nie_
+Produkt składa się z pól:
+- id: _int_
+- name: _string_
+- description: _string_
+- netPrice: _int_
+- availability: _int_
+- category: _string_
+- vatRate: _int_
+- isPromo: _bool_
 
 **UWAGA: Produkty nie muszą znajdować się w bazie danych.**
 
@@ -41,10 +43,10 @@ POST /order
 
 Parametry (payload):
 
-- **client_id** _int_ - id zamawiającego
-- **items** _array_ - tablica zawierająca:
-- **item_id** _int_ - id produktu
-- **count** _int_ - ilość zamówionego produktu
+- **client_id**: _int_ - id zamawiającego
+- **items**: _array_ - tablica zawierająca:
+- **item_id**: _int_ - id produktu
+- **count**: _int_ - ilość zamówionego produktu
 
 W odpowiedzi powinniśmy otrzymać zawartość zamówienia z obliczoną wartością do zapłaty z podziałem na wartość netto i brutto.
 
